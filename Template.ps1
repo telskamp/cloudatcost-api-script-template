@@ -1,4 +1,8 @@
-﻿#### Fill in your api key and email adress below ####
+﻿<# Template for using the cloudatcost api in powershell
+More info on the api:https://panel.cloudatcost.com/api-details.php
+Created by Telskamp
+#>
+#### Fill in your api key and email adress below ####
 $email = "your-cac-email-adress@here.com"
 $Apikey = "Your CAC Api key here"
 
@@ -21,3 +25,12 @@ $resources = $cp +"/resources.php"+$login
 
 #### Example Query ####
 Invoke-RestMethod -uri $listservers |Select-Object -ExpandProperty data 
+
+#### Example post Query below (reboots server) ####                
+$body = @{ 
+    key = $apikey
+    login = $email
+    sid = $sid
+action = "reset"
+}
+                Invoke-RestMethod -uri $powerop -body $body -Method Post
